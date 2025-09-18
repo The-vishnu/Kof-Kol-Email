@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Send, User, Clock, PhoneCall, Video, Info} from "lucide-react";
+import { ThemeContext } from "../context/ThemContext";
 
 function ChatSection() {
   const date = new Date();
@@ -12,6 +13,7 @@ function ChatSection() {
   const [inputMessage, setInputMessage] = useState("");
   const [isActive, setActiveStatus] = useState(true);
   const messagesEndRef = useRef(null);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const sendMessageSound = new Audio("/assets/notification5.mp3");
 

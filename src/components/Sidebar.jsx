@@ -2,7 +2,8 @@ import { React, useState } from "react";
 import { Search, Settings, Users, Info, Cpu, Inbox } from "lucide-react";
 
 function Sidebar() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
       <div className="h-screen w-[60px] bg-gray-200 flex flex-col items-center py-6 gap-6 rounded-r-3xl shadow-lg relative">
@@ -41,13 +42,16 @@ function Sidebar() {
           </div>
 
           {/* Settings */}
-          <div className="relative group w-[15px]">
+          <div className="relative group" onClick={() => setIsOpen((prev) => !prev)}>
             <Settings
               size={35}
               className="cursor-pointer p-2 rounded-lg hover:bg-gray-300 transition-all duration-200"
             />
             <span className="absolute left-full top-1/2 -translate-y-1/2 ml-3 bg-gray-300 text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
               Settings
+            </span>
+            <span className={`bg-gray-300 w-[300px] h-[500px] absolute left-full top-40 -translate-y-1/2 ml-3 rounded-4xl px-4 py-4 ${isOpen? "block" : "hidden"} `}>
+              dark
             </span>
           </div>
         </div>
