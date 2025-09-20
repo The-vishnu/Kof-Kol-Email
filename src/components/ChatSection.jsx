@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import { Send, User, Clock, PhoneCall, Video, Info} from "lucide-react";
 import { ThemeContext } from "../context/ThemContext";
 
@@ -13,7 +13,7 @@ function ChatSection() {
   const [inputMessage, setInputMessage] = useState("");
   const [isActive, setActiveStatus] = useState(true);
   const messagesEndRef = useRef(null);
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);  
 
   const sendMessageSound = new Audio("/assets/notification5.mp3");
 
@@ -37,11 +37,11 @@ function ChatSection() {
   }, [SenderMessages, RecevierMessaeg]);
   return (
     <>
-      <div className="w-full bg-gray-200 h-screen flex flex-col justify-between rounded-3xl p-4 ">
+      <div className={`w-full h-screen flex flex-col justify-between rounded-3xl p-2 ${theme === "light" ? "bg-gray-200" : "bg-gray-800"}`}>
         {/* 🌸 User Profile Section */}
-        <div className="flex items-center justify-between bg-gray-100 p-2 rounded-2xl">
+        <div className={`flex items-center justify-between bg-gray-100 p-2 rounded-3xl mt-0 ${theme === "light" ? "bg-gray-100 text-gray-800" : "bg-gray-700 text-gray-200"}`}>
           {/* Profile Info */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 my-1">
             <img
               src="https://i.pravatar.cc/50"
               alt="User Profile"
@@ -49,9 +49,9 @@ function ChatSection() {
             />
 
             <div>
-              <p class="text-lg  group relative w-max cursor-pointer">
+              <p className="text-lg  group relative w-max cursor-pointer">
                 <span>Arvind</span>
-                <span class="absolute -bottom-1 right-0 w-0 transition-all h-0.5 bg-gray-400 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 right-0 w-0 transition-all h-0.5 bg-gray-400 group-hover:w-full"></span>
               </p>
               <span
                 className={`text-sm ${
@@ -118,7 +118,7 @@ function ChatSection() {
         </div>
 
         {/* Input Section */}
-        <div className="p-3 bg-gray-100 rounded-3xl flex items-center space-x-3">
+        <div className="p-3 bg-gray-100 rounded-3xl flex items-center mb-2 space-x-3">
           {/* Input Field */}
           <input
             type="text"
