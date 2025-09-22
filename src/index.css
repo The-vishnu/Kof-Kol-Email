@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-#root{
+/* #root{
   padding: 0;
   margin: 0;
   display: flex;
   background-color: #dadada;
-}
+} */
 
 /* App.css ya global css */
 .hide-scrollbar::-webkit-scrollbar {

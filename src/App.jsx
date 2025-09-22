@@ -41,6 +41,9 @@ function App() {
         <div className={`flex flex-row w-full h-screen ${theme === "light" ? "bg-gray-300 " : "bg-gray-700"}`}>
         <Sidebar />
         <ChatSection />
+        <Routes>
+          
+        </Routes>
         </div>
       </ThemeContext.Provider>
     </>

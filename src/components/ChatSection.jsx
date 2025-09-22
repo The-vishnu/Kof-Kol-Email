@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
-import { Send, User, Clock, PhoneCall, Video, Info} from "lucide-react";
+import { Send, User, Clock, PhoneCall, Video, Info } from "lucide-react";
 import { ThemeContext } from "../context/ThemContext";
 
 function ChatSection() {
@@ -13,7 +13,7 @@ function ChatSection() {
   const [inputMessage, setInputMessage] = useState("");
   const [isActive, setActiveStatus] = useState(true);
   const messagesEndRef = useRef(null);
-  const { theme, toggleTheme } = useContext(ThemeContext);  
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const sendMessageSound = new Audio("/assets/notification5.mp3");
 
@@ -32,14 +32,31 @@ function ChatSection() {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [SenderMessages, RecevierMessaeg]);
   return (
     <>
-      <div className={`w-full h-screen flex flex-col justify-between rounded-3xl p-2 ${theme === "light" ? "bg-gray-200" : "bg-gray-800"}`}>
+      <div
+        className={`w-full h-screen flex flex-col justify-between rounded-3xl p-3 pt-0  ${
+          theme === "light" ? "bg-gray-200" : "bg-gray-800"
+        }`}
+      >
         {/* 🌸 User Profile Section */}
-        <div className={`flex items-center justify-between bg-gray-100 p-2 rounded-3xl mt-0 ${theme === "light" ? "bg-gray-100 text-gray-800" : "bg-gray-700 text-gray-200"}`}>
+        <div
+          className={`flex items-center justify-between bg-gray-100 p-2 rounded-3xl mt-0 ${
+            theme === "light"
+              ? "bg-gray-100 text-gray-800"
+              : "bg-gray-700 text-gray-200"
+          }`}
+        >
           {/* Profile Info */}
           <div className="flex items-center space-x-4 my-1">
             <img
@@ -67,14 +84,14 @@ function ChatSection() {
           {/* Call Buttons */}
           <div className="flex space-x-3">
             <button className="bg-gray-300 hover:bg-slate-400 p-2 rounded-full cursor-pointer">
-              <PhoneCall size={20}/> {/* Call Icon */}
+              <PhoneCall size={20} /> {/* Call Icon */}
             </button>
 
             <button className="bg-gray-300 hover:bg-slate-400 p-2 rounded-full cursor-pointer">
-              <Video size={20}/> {/* Video Call Icon */}
+              <Video size={20} /> {/* Video Call Icon */}
             </button>
 
-             <button className=" hover:bg-slate-400 p-2 h-10 items-center justify-center w-10 rounded-full cursor-pointer flex flex-col gap-0.5">
+            <button className=" hover:bg-slate-400 p-2 h-10 items-center justify-center w-10 rounded-full cursor-pointer flex flex-col gap-0.5">
               <span className="w-1 h-1 bg-gray-800 rounded-full"></span>
               <span className="w-1 h-1 bg-gray-800 rounded-full"></span>
               <span className="w-1 h-1 bg-gray-800 rounded-full"></span>
@@ -82,7 +99,7 @@ function ChatSection() {
           </div>
         </div>
         {/* Messages Area */}
-        <div className="flex flex-col space-y-4 overflow-auto flex-1 mb-4 hide-scrollbar">
+        <div className="flex flex-col space-y-4 overflow-auto flex-1 hide-scrollbar">
           {/* Sent Message (User → Bot) */}
           {SenderMessages.map((sendermsg, map) => (
             <div className="flex flex-col items-end">
@@ -93,7 +110,7 @@ function ChatSection() {
               </div>
 
               {/* Message Bubble */}
-              <div className="bg-gray-300 p-3 rounded-3xl rounded-br-none max-w-xs break-words">
+              <div className="bg-gray-300 p-3 rounded-3xl rounded-br-none max-w-[660px] break-words whitespace-pre-wrap">
                 {sendermsg.text}
               </div>
             </div>
@@ -120,13 +137,14 @@ function ChatSection() {
         {/* Input Section */}
         <div className="p-3 bg-gray-100 rounded-3xl flex items-center mb-2 space-x-3">
           {/* Input Field */}
-          <input
-            type="text"
+           <textarea
             placeholder="Type a message..."
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
-            className="flex-1 p-3 rounded-full focus:outline-none bg-white shadow"
-          />
+            onKeyDown={handleKeyPress}
+
+            className="flex-1 p-2 rounded-l-4xl focus:outline-none bg-white shadow h-12 max-h-30  overflow-auto"
+          /> 
 
           {/* Send Button with Icon */}
           <button
