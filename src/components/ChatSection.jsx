@@ -11,6 +11,7 @@ function ChatSection() {
   const [SenderMessages, setSenderMessages] = useState([]);
   const [RecevierMessaeg, setRecevierMessage] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
+  const textareaRef = useRef(null);
   const [isActive, setActiveStatus] = useState(true);
   const messagesEndRef = useRef(null);
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -30,6 +31,13 @@ function ChatSection() {
       ]);
       setInputMessage("");
     }
+  };
+
+   const handleInput = (e) => {
+    const textarea = textareaRef.current;
+    setInputMessage(e.target.value);
+    textarea.style.height = "auto"; // reset height
+    textarea.style.height = textarea.scrollHeight + "px"; // set to content height
   };
 
   const handleKeyPress = (e) => {
@@ -135,7 +143,7 @@ function ChatSection() {
         </div>
 
         {/* Input Section */}
-        <div className="p-3 bg-gray-100 rounded-3xl flex items-center mb-2 space-x-3">
+        <div className="p-3 bg-gray-100 rounded-3xl flex min-h-[40px] max-h-[100px] overflow-y-auto items-center mb-2 space-x-3">
           {/* Plus Button */}
           <button
             className="hover:bg-slate-400 bg-gray-300 p-3 rounded-full cursor-pointer"
@@ -146,9 +154,9 @@ function ChatSection() {
            <textarea
             placeholder="Type a message..."
             value={inputMessage}
-            onChange={(e) => setInputMessage(e.target.value)}
+            onChange={handleInput}
             onKeyDown={handleKeyPress}
-            className="flex-1 p-2 rounded-4xl focus:outline-none bg-white shadow resize-none max-h-12 overflow-auto"
+            className="flex-1 p-2 rounded-4xl focus:outline-none bg-white shadow resize-none min-h-11 max-h-12 overflow-auto"
           /> 
           {/* Microphone Button */}
           <button
