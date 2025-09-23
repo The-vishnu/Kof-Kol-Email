@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
-import { Send, User, Clock, PhoneCall, Video, Info } from "lucide-react";
+import { Send, User, Clock, PhoneCall, Video, Info, MicIcon, Plus } from "lucide-react";
 import { ThemeContext } from "../context/ThemContext";
 
 function ChatSection() {
@@ -136,16 +136,26 @@ function ChatSection() {
 
         {/* Input Section */}
         <div className="p-3 bg-gray-100 rounded-3xl flex items-center mb-2 space-x-3">
+          {/* Plus Button */}
+          <button
+            className="hover:bg-slate-400 bg-gray-300 p-3 rounded-full cursor-pointer"
+          >
+            <Plus size={20} />
+          </button>
           {/* Input Field */}
            <textarea
             placeholder="Type a message..."
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyDown={handleKeyPress}
-
-            className="flex-1 p-2 rounded-l-4xl focus:outline-none bg-white shadow h-12 max-h-30  overflow-auto"
+            className="flex-1 p-2 rounded-4xl focus:outline-none bg-white shadow resize-none max-h-12 overflow-auto"
           /> 
-
+          {/* Microphone Button */}
+          <button
+            className="hover:bg-slate-400 bg-gray-300 p-3 rounded-full cursor-pointer"
+          >
+            <MicIcon size={20} />
+          </button>
           {/* Send Button with Icon */}
           <button
             className="hover:bg-slate-400 bg-gray-300 p-3 rounded-full cursor-pointer"
