@@ -1,5 +1,16 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
-import { Send, User, Clock, PhoneCall, Video, Info, MicIcon, Plus } from "lucide-react";
+import {
+  Send,
+  User,
+  Clock,
+  PhoneCall,
+  Video,
+  Info,
+  MicIcon,
+  Plus,
+  Check,
+  CheckCheck
+} from "lucide-react";
 import { ThemeContext } from "../context/ThemContext";
 
 function ChatSection() {
@@ -11,6 +22,7 @@ function ChatSection() {
   const [SenderMessages, setSenderMessages] = useState([]);
   const [RecevierMessaeg, setRecevierMessage] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
+  const [isSeen, setIsSeen] = useState();
   const textareaRef = useRef(null);
   const [isActive, setActiveStatus] = useState(true);
   const messagesEndRef = useRef(null);
@@ -27,13 +39,14 @@ function ChatSection() {
           text: inputMessage,
           timeStamp: showTime,
           senderId: "You",
+          isSeen: setIsSeen(false) // default false, when receiver sees it, set to true
         },
       ]);
       setInputMessage("");
     }
   };
 
-   const handleInput = (e) => {
+  const handleInput = (e) => {
     const textarea = textareaRef.current;
     setInputMessage(e.target.value);
     textarea.style.height = "auto"; // reset height
@@ -115,10 +128,15 @@ function ChatSection() {
               <div className="flex items-center space-x-2 text-sm text-gray-600">
                 <span className="font-semibold">{sendermsg.senderId}</span>
                 <span>{sendermsg.timeStamp}</span>
+                {isSeen ? (
+                  <span className="text-blue-400 "><CheckCheck size={16} /></span>
+                ) : (
+                  <span className="text-gray-400"><Check size={16} /></span>
+                )}
               </div>
 
               {/* Message Bubble */}
-              <div className="bg-gray-300 p-3 rounded-3xl rounded-br-none max-w-[660px] break-words whitespace-pre-wrap">
+              <div className="bg-gray-100 p-3 rounded-3xl rounded-tr-none max-w-[660px] break-words whitespace-pre-wrap">
                 {sendermsg.text}
               </div>
             </div>
@@ -143,25 +161,27 @@ function ChatSection() {
         </div>
 
         {/* Input Section */}
-        <div className="p-3 bg-gray-100 rounded-3xl flex min-h-[40px] max-h-[100px] overflow-y-auto items-center mb-2 space-x-3">
+        <div
+          className={`p-3 rounded-3xl flex overflow-y-auto items-center mb-2 space-x-3 ${
+            theme === "light" ? "bg-gray-100" : "bg-gray-700"
+          }`}
+        >
           {/* Plus Button */}
-          <button
-            className="hover:bg-slate-400 bg-gray-300 p-3 rounded-full cursor-pointer"
-          >
+          <button className="hover:bg-slate-400 bg-gray-300 p-3 rounded-full cursor-pointer">
             <Plus size={20} />
           </button>
           {/* Input Field */}
-           <textarea
+          <textarea
             placeholder="Type a message..."
             value={inputMessage}
             onChange={handleInput}
             onKeyDown={handleKeyPress}
-            className="flex-1 p-2 rounded-4xl focus:outline-none bg-white shadow resize-none min-h-11 max-h-12 overflow-auto"
-          /> 
+            className={`flex-1 p-2 rounded-3xl focus:outline-none shadow resize-y min-h-11 max-h-30 overflow-auto ${
+              theme === "light" ? "bg-white" : "bg-gray-300"
+            }`}
+          />
           {/* Microphone Button */}
-          <button
-            className="hover:bg-slate-400 bg-gray-300 p-3 rounded-full cursor-pointer"
-          >
+          <button className="hover:bg-slate-400 bg-gray-300 p-3 rounded-full cursor-pointer">
             <MicIcon size={20} />
           </button>
           {/* Send Button with Icon */}
