@@ -3,6 +3,9 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import Sidebar from "./components/Sidebar";
 import ChatSection from "./components/ChatSection";
+import InboxMail from "./pages/InboxMail";
+import AiChat from "./pages/AiChat";
+import Trash from "./pages/Trash";
 import "./App.css";
 import { ThemeContext } from "./context/ThemContext";
 import { isMobile } from "react-device-detect";
@@ -40,9 +43,11 @@ function App() {
       <ThemeContext.Provider value={{theme, toggleTheme}}>
         <div className={`flex flex-row w-full h-screen ${theme === "light" ? "bg-gray-300 " : "bg-gray-700"}`}>
         <Sidebar />
-        <ChatSection />
         <Routes>
-          
+          <Route path="/" element={ <ChatSection /> } />
+          <Route path="/inbox" element={ <InboxMail /> } />
+          <Route path="/trash" element={ <Trash /> } />
+          <Route path="/aichat" element={ <AiChat /> } />
         </Routes>
         </div>
       </ThemeContext.Provider>
