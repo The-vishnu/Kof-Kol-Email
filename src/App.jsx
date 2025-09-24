@@ -47,7 +47,7 @@ function App() {
           <Route path="/" element={ <ChatSection /> } />
           <Route path="/inbox" element={ <InboxMail /> } />
           <Route path="/trash" element={ <Trash /> } />
-          <Route path="/aichat" element={ <AiChat /> } />
+          <Route path="/aichat" element={ <AiChat  /> } />
         </Routes>
         </div>
       </ThemeContext.Provider>

@@ -13,9 +13,43 @@ import {
 } from "lucide-react";
 import { ThemeContext } from "../context/ThemContext";
 import SidebarIcons from "./SidebarIcons";
+import SidebarFriendsList from "./SidebarFriendsList";
 
 function Sidebar() {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const [selectedFriend, setSelectedFriend] = useState(null);
+
+  const handleSelectFriend = (friend) => {
+    setSelectedFriend(friend);
+    // Yahan aap selected friend ka state update kar sakte ho ya parent ko notify kar sakte ho
+    console.log("Selected friend:", friend);
+    
+  };
+
+  const [friends, setSelectedFriends] = useState([
+    {
+      id: 1,
+      name: "Alice Johnson",
+      email: "alice@example.com",
+      avatar: "https://i.pravatar.cc/150?img=1",
+      lastMessage: "Hey! How's it going?",
+    },
+    {
+      id: 2,
+      name: "Bob Smith",
+      email: "bob@example.com",
+      avatar: "https://i.pravatar.cc/150?img=2",
+      lastMessage: "See you later!",
+    },
+    {
+      id: 3,
+      name: "Charlie Brown",
+      email: "charlie@example.com",
+      avatar: "https://i.pravatar.cc/150?img=3",
+      lastMessage: "Let's catch up soon.",
+    },
+  ]);
+
 
   return (
     <>
@@ -54,21 +88,7 @@ function Sidebar() {
         </div>
         {/* friends Profile section */}
         <div className=" w-full min-h-[500px]">
-          <div
-            className={`flex flex-row justify-between items-center w-full min-h-[50px] border-b-0.1 p-0.5 m-0.5     transition-all  rounded-lg cursor-pointer ${
-              theme === "light" ? "hover:bg-gray-200" : "hover:bg-gray-500"
-            }`}
-          >
-            <div className="flex flex-row gap-2 items-center">
-              <img
-                src="https://i.pravatar.cc/50"
-                alt="User Profile"
-                className="w-12 h-12 rounded-full"
-              />
-              <span>Sam Altman</span>
-            </div>
-            <span>10:40 PM</span>
-          </div>
+          <SidebarFriendsList friends={friends} onSelectFriend={handleSelectFriend} />
         </div>
       </div>
     </>

@@ -12,6 +12,7 @@ import {
   CheckCheck
 } from "lucide-react";
 import { ThemeContext } from "../context/ThemContext";
+import Sidebar from "./Sidebar";
 
 function ChatSection() {
   const date = new Date();
@@ -81,7 +82,7 @@ function ChatSection() {
           {/* Profile Info */}
           <div className="flex items-center space-x-4 my-1">
             <img
-              src="https://i.pravatar.cc/50"
+              src={ "https://i.pravatar.cc/50"}
               alt="User Profile"
               className="w-12 h-12 rounded-full"
             />
@@ -136,7 +137,7 @@ function ChatSection() {
               </div>
 
               {/* Message Bubble */}
-              <div className="bg-gray-100 p-3 rounded-3xl rounded-tr-none max-w-[660px] break-words whitespace-pre-wrap">
+              <div className="bg-gray-300 p-3 rounded-3xl rounded-tr-none max-w-[660px] break-words whitespace-pre-wrap">
                 {sendermsg.text}
               </div>
             </div>
@@ -152,7 +153,7 @@ function ChatSection() {
               </div>
 
               {/* Message Bubble */}
-              <div className="bg-gray-300 p-3 rounded-3xl rounded-bl-none max-w-xs break-words">
+              <div className="bg-gray-300 p-3 rounded-3xl rounded-tr-none max-w-[660px] break-words whitespace-pre-wrap">
                 {RecevierMessaeg}
               </div>
             </div>
