@@ -13,8 +13,9 @@ import {
 } from "lucide-react";
 import { ThemeContext } from "../context/ThemContext";
 import Sidebar from "./Sidebar";
+import SidebarFriendsList from "./SidebarFriendsList";
 
-function ChatSection() {
+function ChatSection({selectedFriend}) {
   const date = new Date();
   const showTime = date.toLocaleTimeString([], {
     hour: "2-digit",
@@ -82,14 +83,14 @@ function ChatSection() {
           {/* Profile Info */}
           <div className="flex items-center space-x-4 my-1">
             <img
-              src={ "https://i.pravatar.cc/50"}
+              src={ selectedFriend?.avatar || "https://i.pravatar.cc/150?img=1"}
               alt="User Profile"
               className="w-12 h-12 rounded-full"
             />
 
             <div>
               <p className="text-lg  group relative w-max cursor-pointer">
-                <span>Arvind</span>
+                <span>{selectedFriend?.name || "Unknown User"}</span>
                 <span className="absolute -bottom-1 right-0 w-0 transition-all h-0.5 bg-gray-400 group-hover:w-full"></span>
               </p>
               <span

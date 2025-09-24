@@ -1,16 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ThemeContext } from "../context/ThemContext";
+import ChatSection from "./ChatSection";
 
 function SidebarFriendsList({ friends, onSelectFriend }) {
   const { theme } = useContext(ThemeContext);
   const [selectedFriend, setSelectedFriend] = useState(null);
 
   // Optional effect: whenever selected changes, log or perform side effects
-  useEffect(() => {
-    if (selectedFriend) {
-      console.log("Selected friend:", selectedFriend);
-    }
-  }, [selectedFriend]);
+  // useEffect(() => {
+  //   if (selectedFriend) {
+  //     console.log("Selected friend:", selectedFriend);
+  //   }
+  // }, [selectedFriend]);
 
   const handleSelect = (selectedFriend) => {
     setSelectedFriend(selectedFriend);
@@ -53,6 +54,7 @@ function SidebarFriendsList({ friends, onSelectFriend }) {
           </span>
         </div>
       ))}
+      {/* <ChatSection selectedFriend={selectedFriend} /> */}
     </div>
   );
 }

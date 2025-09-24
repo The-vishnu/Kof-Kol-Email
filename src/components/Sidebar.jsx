@@ -12,19 +12,28 @@ import {
   Archive,
 } from "lucide-react";
 import { ThemeContext } from "../context/ThemContext";
+import { useAuthStore } from "../store/useAuthStore";
 import SidebarIcons from "./SidebarIcons";
 import SidebarFriendsList from "./SidebarFriendsList";
+import SidebarSkeleton from "./skeletons/SidebarSkeleton";
+import { useChatStore } from "../store/useChatStore";
 
 function Sidebar() {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const [selectedFriend, setSelectedFriend] = useState(null);
+  const { setSelectedFriend, getUser, getMessages } = useChatStore();
+
+  useEffect(() => {
+    getUser();
+  }, [getUser]);
 
   const handleSelectFriend = (friend) => {
     setSelectedFriend(friend);
-    // Yahan aap selected friend ka state update kar sakte ho ya parent ko notify kar sakte ho
-    console.log("Selected friend:", friend);
+    console.log("Selected friend in Sidebar:", friend);
     
+    // Yahan aap selected friend ka state update kar sakte ho ya parent ko notify kar sakte ho
   };
+
+  
 
   const [friends, setSelectedFriends] = useState([
     {
@@ -49,6 +58,10 @@ function Sidebar() {
       lastMessage: "Let's catch up soon.",
     },
   ]);
+
+  // if(isUserLoading){
+  //   return <SidebarSkeleton />;
+  // }
 
 
   return (
