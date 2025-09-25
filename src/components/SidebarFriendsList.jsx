@@ -1,8 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ThemeContext } from "../context/ThemContext";
 import ChatSection from "./ChatSection";
+import { useAuthStore } from "../store/useAuthStore";
 
 function SidebarFriendsList({ friends, onSelectFriend }) {
+  const { authUser, checkAuth } = useAuthStore();
   const { theme } = useContext(ThemeContext);
   const [selectedFriend, setSelectedFriend] = useState(null);
 

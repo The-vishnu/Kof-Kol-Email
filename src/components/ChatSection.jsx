@@ -14,8 +14,10 @@ import {
 import { ThemeContext } from "../context/ThemContext";
 import Sidebar from "./Sidebar";
 import SidebarFriendsList from "./SidebarFriendsList";
+import { useAuthStore } from "../store/useAuthStore";
 
 function ChatSection({selectedFriend}) {
+  const { authUser, checkAuth } = useAuthStore();
   const date = new Date();
   const showTime = date.toLocaleTimeString([], {
     hour: "2-digit",

@@ -19,6 +19,7 @@ import SidebarSkeleton from "./skeletons/SidebarSkeleton";
 import { useChatStore } from "../store/useChatStore";
 
 function Sidebar() {
+  const { authUser, checkAuth } = useAuthStore();
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { setSelectedFriend, getUser, getMessages } = useChatStore();
 

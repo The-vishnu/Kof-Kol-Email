@@ -7,10 +7,12 @@ import HomePage from "./pages/HomePage";
 import InboxMail from "./pages/InboxMail";
 import AiChat from "./pages/AiChat";
 import Trash from "./pages/Trash";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
 import "./App.css";
 import { ThemeContext } from "./context/ThemContext";
 import { isMobile } from "react-device-detect";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
 
 function App() {
@@ -19,7 +21,7 @@ function App() {
     checkAuth();
   }, [checkAuth]);
 
-  console.log("Authenticated User:", authUser);
+  console.log("Authenticated User:", {authUser});
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [theme, setTheme] = useState("light");
   const toggleTheme = () => {
@@ -67,8 +69,10 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<HomePage />}
+              element={ authUser ? <HomePage /> : <Navigate to="/login" />}
             />
+            <Route path="/signup" element={ !authUser ? <SignUpPage /> : <Navigate to="/" />} />
+            <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
             <Route path="/inbox" element={<InboxMail />} />
             <Route path="/trash" element={<Trash />} />
             <Route path="/aichat" element={<AiChat />} />
