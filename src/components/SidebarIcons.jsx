@@ -10,13 +10,16 @@ import {
   SunMoon,
   Trash,
   Archive,
+  LogOutIcon
 } from "lucide-react";
 import { ThemeContext } from "../context/ThemContext";
+import KofKol from "../assets/Kof-Kol.png";
 import { useAuthStore } from "../store/useAuthStore";
 
 function SidebarIcons({ onSelectView }) {
   const { authUser, checkAuth } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
+  const { logout } = useAuthStore();
   const popRef = useRef(null);
   const iconRef = useRef(null);
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -41,6 +44,10 @@ function SidebarIcons({ onSelectView }) {
 
   return (
     <>
+      {/* logo */}
+      <div className="relative group mb-6 mt-1">
+        <img src={KofKol} alt="Kof-Kol Logo" className=" w-[50px] h-[40px] cursor-pointer" />
+      </div>
       {/* Home */}
       <div className="relative group">
         <Inbox
@@ -135,7 +142,7 @@ function SidebarIcons({ onSelectView }) {
           ref={popRef}
           className={`${
             theme === "light" ? "bg-gray-300" : "bg-gray-500"
-          } w-[300px] h-[500px] absolute left-full top-10 -translate-y-1/2 ml-3 rounded-4xl px-4 py-4 ${
+          } w-[300px] h-[500px] absolute left-full top-[-50px] -translate-y-1/2 ml-3 rounded-4xl px-4 py-4 ${
             isOpen ? "block" : "hidden"
           } `}
         >
@@ -158,13 +165,24 @@ function SidebarIcons({ onSelectView }) {
                 }`}
               />
               <p
-                className={`text-sm text-gray-600 ${
-                  theme === "light" ? "text-gray-400" : "text-gray-300"
+                className={`text-sm  ${
+                  theme === "light" ? "text-gray-500" : "text-gray-400"
                 }`}
                 onClick={toggleTheme}
               >
                 {theme === "light" ? "Light Mode" : "Dark Mode "}
               </p>
+            </div>
+
+            <div className={`flex flex-row gap-2 cursor-pointer`} onClick={logout}>
+              <LogOutIcon
+                size={20}
+                onClick={logout}
+                className={`${
+                  theme === "light" ? "text-gray-600" : "text-gray-700"
+                }`}
+              />
+              <p className={`text-sm  text-gray-400 ${theme === "light" ? "text-gray-500" : "text-gray-400"} `}>Log Out</p>
             </div>
           </div>
         </span>
