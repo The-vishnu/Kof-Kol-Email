@@ -10,7 +10,8 @@ import {
   SunMoon,
   Trash,
   Archive,
-  LogOutIcon
+  LogOutIcon,
+  PenBoxIcon,
 } from "lucide-react";
 import { ThemeContext } from "../context/ThemContext";
 import KofKol from "../assets/Kof-Kol.png";
@@ -46,7 +47,11 @@ function SidebarIcons({ onSelectView }) {
     <>
       {/* logo */}
       <div className="relative group mb-6 mt-1">
-        <img src={KofKol} alt="Kof-Kol Logo" className=" w-[50px] h-[40px] cursor-pointer" />
+        <img
+          src={KofKol}
+          alt="Kof-Kol Logo"
+          className=" w-[50px] h-[40px] cursor-pointer"
+        />
       </div>
       {/* Home */}
       <div className="relative group">
@@ -109,7 +114,7 @@ function SidebarIcons({ onSelectView }) {
       <div className="relative group">
         <Users
           size={35}
-          className="cursor-pointer p-2 rounded-lg  transition-all duration-200"
+          className="cursor-pointer p-2 rounded-lg  transition-all duration-200 active:scale-95" 
         />
         <span
           className={`absolute left-full top-1/2 -translate-y-1/2 ml-3 bg-gray-400 text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap ${
@@ -174,7 +179,29 @@ function SidebarIcons({ onSelectView }) {
               </p>
             </div>
 
-            <div className={`flex flex-row gap-2 cursor-pointer`} onClick={logout}>
+            <div
+              className={`flex flex-row gap-2 cursor-pointer`}
+              onClick={logout}
+            >
+              <PenBoxIcon
+                size={20}
+                className={`${
+                  theme === "light" ? "text-gray-600" : "text-gray-700"
+                }`}
+              />
+              <p
+                className={`text-sm  text-gray-400 ${
+                  theme === "light" ? "text-gray-500" : "text-gray-400"
+                } `}
+              >
+                Update Profile
+              </p>
+            </div>
+
+            <div
+              className={`flex flex-row gap-2 cursor-pointer`}
+              onClick={logout}
+            >
               <LogOutIcon
                 size={20}
                 onClick={logout}
@@ -182,7 +209,13 @@ function SidebarIcons({ onSelectView }) {
                   theme === "light" ? "text-gray-600" : "text-gray-700"
                 }`}
               />
-              <p className={`text-sm  text-gray-400 ${theme === "light" ? "text-gray-500" : "text-gray-400"} `}>Log Out</p>
+              <p
+                className={`text-sm  text-gray-400 ${
+                  theme === "light" ? "text-gray-500" : "text-gray-400"
+                } `}
+              >
+                Log Out
+              </p>
             </div>
           </div>
         </span>

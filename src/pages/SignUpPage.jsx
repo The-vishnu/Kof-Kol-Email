@@ -36,6 +36,11 @@ const SignUpPage = () => {
     if(isValid === true) {
       signUp(formData);
     }
+    setFormData({
+      email: "",
+      username: "",
+      password: ""
+    });
   };
   return (
     <>

@@ -21,6 +21,7 @@ const LoginPage = () => {
     login(formData);
   };
 
+
   return (
     <div className="flex justify-center items-center min-h-screen ml-[30px] bg-gray-300">
       <div className="flex gap-1 justify-center items-center min-h-screen w-[600px] h-96 bg-gray-300">
@@ -84,8 +85,15 @@ const LoginPage = () => {
             </div>
 
             {/* Submit button */}
-            <button type="submit" className="w-full cursor-pointer inset-y-0 bg-gray-500 text-white py-3 rounded-xl font-semibold hover:opacity-90 transition">
-              {isLogging ? <Loader className="animate-spin mx-auto" /> : "Login"}
+            <button
+              type="submit"
+              className="w-full cursor-pointer inset-y-0 bg-gray-500 text-white py-3 rounded-xl font-semibold hover:opacity-90 transition"
+            >
+              {isLogging ? (
+                <Loader className="animate-spin mx-auto" />
+              ) : (
+                "Login"
+              )}
             </button>
           </div>
         </form>
