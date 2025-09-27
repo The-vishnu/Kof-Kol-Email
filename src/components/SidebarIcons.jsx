@@ -181,7 +181,6 @@ function SidebarIcons({ onSelectView }) {
 
             <div
               className={`flex flex-row gap-2 cursor-pointer`}
-              onClick={logout}
             >
               <PenBoxIcon
                 size={20}

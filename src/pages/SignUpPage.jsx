@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Navigate, Link } from "react-router-dom";
-import { EyeIcon, EyeOff, MailCheck, Loader } from "lucide-react";
+import { EyeIcon, EyeOff, MailCheck, Loader, } from "lucide-react";
 import KofKol from "../assets/Kof-Kol.png";
 import { useAuthStore } from "../store/useAuthStore";
+import  google  from "/assets/google.png";
 import toast from "react-hot-toast";
 
 const SignUpPage = () => {
@@ -110,6 +111,12 @@ const SignUpPage = () => {
               {/* Submit button */}
               <button type="submit" className="w-full bg-gray-500 text-white py-3 rounded-xl font-semibold hover:opacity-90 cursor-pointer transition" disabled={isSigningUp} >
                 {isSigningUp ? <Loader className="animate-spin mx-auto" /> : "Sign Up"}
+              </button>
+                <p className="ml-55 mt-[-20px] mb-[-20px]"> or </p>
+
+              <button type="butten" className="w-full bg-gray-100 text-black flex flex-row gap-1.5 py-3 rounded-xl font-semibold hover:opacity-90 cursor-pointer transition text-center items-center justify-center" disabled={isSigningUp} >
+                <img src={google} alt="" className="w-5 h-5" />
+                Sign Up with Google
               </button>
             </div>
           </form>

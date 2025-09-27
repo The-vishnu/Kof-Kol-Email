@@ -3,6 +3,7 @@ import { Navigate, Link } from "react-router-dom";
 import KofKol from "../assets/Kof-Kol.png";
 import { EyeIcon, EyeOff, MailCheck, Loader } from "lucide-react"; // EyeOff = closed eye
 import { useAuthStore } from "../store/useAuthStore";
+import google from "/assets/google.png";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,7 +21,6 @@ const LoginPage = () => {
     e.preventDefault();
     login(formData);
   };
-
 
   return (
     <div className="flex justify-center items-center min-h-screen ml-[30px] bg-gray-300">
@@ -94,6 +94,15 @@ const LoginPage = () => {
               ) : (
                 "Login"
               )}
+            </button>
+            <p className="ml-55 mt-[-20px] mb-[-20px]"> or </p>
+            <button
+              type="submit"
+              className="w-full bg-gray-100 text-black flex flex-row gap-1.5 py-3 rounded-xl font-semibold hover:opacity-90 cursor-pointer transition text-center items-center justify-center"
+              disabled={isLogging}
+            >
+              <img src={google} alt="" className="w-5 h-5" />
+              login with Google
             </button>
           </div>
         </form>
