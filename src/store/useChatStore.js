@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import { axiosInstance } from "../lib/axios.js";
+import toast from "react-hot-toast";
 
 export const useChatStore = create((set) => ({
     messages: [],
@@ -10,7 +12,7 @@ export const useChatStore = create((set) => ({
     getUser: async (email) => {
         set({ isUserLoading: true });
         try {
-            const response = await axiosInstence.get(`/messages/users/${email}`);
+            const response = await axiosInstance.get(`/messages/users/`);
             const data = await response.data;
             set({ users: data, isUserLoading: false });
         } catch (error) {
@@ -19,10 +21,20 @@ export const useChatStore = create((set) => ({
         }
     },
 
+    sendMessages: async (messagesData) => {
+        try {
+            const res = await axiosInstance.post(`/messages/send/${selectedFriend._id}`, messagesData);
+            set({messages: [...messages, res.data]});
+
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
+    },
+
     getMessages: async (email) => {
         set({ isMessagesLoading: true });
         try {
-            const response = await axiosInstence.get(`/messages/${email}`);
+            const response = await axiosInstance.get(`/messages/${email}`);
             const data = await response.data;
             set({ messages: data, isMessagesLoading: false });
         } catch (error) {

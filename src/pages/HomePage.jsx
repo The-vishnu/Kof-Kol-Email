@@ -5,11 +5,12 @@ import NoChatSelected from '../components/noChatSelected'
 import { useChatStore } from '../store/useChatStore'
 
 const HomePage = () => {
-    const { selectedUser } = useChatStore();
+    const { selectedFriend } = useChatStore();
+    console.log(selectedFriend)
   return (
     <>
       <Sidebar />
-      {selectedUser ? <ChatSection selectedFriend={selectedUser} /> : <NoChatSelected />}
+      {selectedFriend ? <ChatSection selectedFriend={selectedFriend} /> : <NoChatSelected />}
     </>
   )
 }

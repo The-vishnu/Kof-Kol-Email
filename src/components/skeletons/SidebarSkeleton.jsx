@@ -1,33 +1,34 @@
-import React from 'react'
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import React from "react";
 
 const SidebarSkeleton = () => {
- if (loading) {
-    return (
-      <div className="space-y-3 p-2">
-        {[...Array(5)].map((_, i) => (
-          <div key={i} className="flex items-center gap-3">
-            <Skeleton circle width={48} height={48} />
-            <div className="flex flex-col w-full">
-              <Skeleton width="70%" height={16} />
-              <Skeleton width="40%" height={12} />
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  }
+  // Dummy array to simulate 6 loading items
+  const skeletonItems = Array(6).fill(null);
 
   return (
-    <div>
-      {friends.map((friend) => (
-        <div key={friend.id} onClick={() => onSelectFriend(friend)}>
-          {/* actual UI */}
+    <div className="w-full h-full overflow-y-auto p-2">
+      {skeletonItems.map((_, index) => (
+        <div
+          key={index}
+          className="flex justify-between items-center w-full p-2 mb-2 rounded-lg bg-gray-200 dark:bg-gray-700 animate-pulse"
+        >
+          {/* Left: Avatar + Name */}
+          <div className="flex items-center gap-3">
+            {/* Avatar circle */}
+            <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-full"></div>
+
+            {/* Name + Email */}
+            <div className="flex flex-col gap-2">
+              <div className="w-24 h-3 bg-gray-300 dark:bg-gray-600 rounded"></div>
+              <div className="w-36 h-2 bg-gray-300 dark:bg-gray-600 rounded"></div>
+            </div>
+          </div>
+
+          {/* Right: Last active time */}
+          <div className="w-10 h-2 bg-gray-300 dark:bg-gray-600 rounded"></div>
         </div>
       ))}
     </div>
   );
-}
+};
 
-export default SidebarSkeleton
+export default SidebarSkeleton;

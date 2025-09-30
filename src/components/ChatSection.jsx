@@ -15,6 +15,7 @@ import { ThemeContext } from "../context/ThemContext";
 import Sidebar from "./Sidebar";
 import SidebarFriendsList from "./SidebarFriendsList";
 import { useAuthStore } from "../store/useAuthStore";
+import usericon from "/assets/userIcon.png"
 
 function ChatSection({selectedFriend}) {
   const { authUser, checkAuth } = useAuthStore();
@@ -85,14 +86,14 @@ function ChatSection({selectedFriend}) {
           {/* Profile Info */}
           <div className="flex items-center space-x-4 my-1">
             <img
-              src={ selectedFriend?.avatar || "https://i.pravatar.cc/150?img=1"}
+              src={ selectedFriend?.profilePic || usericon}
               alt="User Profile"
               className="w-12 h-12 rounded-full"
             />
 
             <div>
               <p className="text-lg  group relative w-max cursor-pointer">
-                <span>{selectedFriend?.name || "Unknown User"}</span>
+                <span>{selectedFriend?.fullName || "Unknown User"}</span>
                 <span className="absolute -bottom-1 right-0 w-0 transition-all h-0.5 bg-gray-400 group-hover:w-full"></span>
               </p>
               <span

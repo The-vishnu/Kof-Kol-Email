@@ -21,7 +21,8 @@ import { useChatStore } from "../store/useChatStore";
 function Sidebar() {
   const { authUser, checkAuth } = useAuthStore();
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const { setSelectedFriend, getUser, getMessages } = useChatStore();
+  const { setSelectedFriend, getUser, getMessages, isUserLoading, users } =
+    useChatStore();
 
   useEffect(() => {
     getUser();
@@ -30,40 +31,15 @@ function Sidebar() {
   const handleSelectFriend = (friend) => {
     setSelectedFriend(friend);
     console.log("Selected friend in Sidebar:", friend);
-    
+
     // Yahan aap selected friend ka state update kar sakte ho ya parent ko notify kar sakte ho
   };
 
-  
-
-  const [friends, setSelectedFriends] = useState([
-    {
-      id: 1,
-      name: "Alice Johnson",
-      email: "alice@example.com",
-      avatar: "https://i.pravatar.cc/150?img=1",
-      lastMessage: "Hey! How's it going?",
-    },
-    {
-      id: 2,
-      name: "Bob Smith",
-      email: "bob@example.com",
-      avatar: "https://i.pravatar.cc/150?img=2",
-      lastMessage: "See you later!",
-    },
-    {
-      id: 3,
-      name: "Charlie Brown",
-      email: "charlie@example.com",
-      avatar: "https://i.pravatar.cc/150?img=3",
-      lastMessage: "Let's catch up soon.",
-    },
-  ]);
+  const [friends, setFriend] = useState(null);
 
   // if(isUserLoading){
   //   return <SidebarSkeleton />;
   // }
-
 
   return (
     <>
@@ -102,7 +78,14 @@ function Sidebar() {
         </div>
         {/* friends Profile section */}
         <div className=" w-full min-h-[500px]">
-          <SidebarFriendsList friends={friends} onSelectFriend={handleSelectFriend} />
+          {isUserLoading ? (
+            <SidebarSkeleton />
+          ) : (
+            <SidebarFriendsList
+              friends={users}
+              onSelectFriend={handleSelectFriend}
+            />
+          )}
         </div>
       </div>
     </>

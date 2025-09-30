@@ -18,9 +18,8 @@ import KofKol from "../assets/Kof-Kol.png";
 import { useAuthStore } from "../store/useAuthStore";
 
 function SidebarIcons({ onSelectView }) {
-  const { authUser, checkAuth } = useAuthStore();
+  const { authUser, checkAuth, logout } = useAuthStore();
   const [isOpen, setIsOpen] = useState(false);
-  const { logout } = useAuthStore();
   const popRef = useRef(null);
   const iconRef = useRef(null);
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -203,7 +202,6 @@ function SidebarIcons({ onSelectView }) {
             >
               <LogOutIcon
                 size={20}
-                onClick={logout}
                 className={`${
                   theme === "light" ? "text-gray-600" : "text-gray-700"
                 }`}

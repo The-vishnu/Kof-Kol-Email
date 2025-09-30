@@ -10,7 +10,7 @@ const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
-    username: "",
+    fullName: "",
     password: "",
   });
 
@@ -19,7 +19,7 @@ const SignUpPage = () => {
   const validationForm = () => {
     if(!formData.email.trim()) return toast.error("Email is required");
     if(!/.+@.+\..+/.test(formData.email.trim())) return toast.error("Email is invalid");
-    if(!formData.username.trim()) return toast.error("Full name is required");
+    if(!formData.fullName.trim()) return toast.error("Full name is required");
     if(!formData.password.trim()) return toast.error("Password is required");
     if(formData.password.length < 6) return toast.error("Password must be at least 6 characters long");
 
@@ -39,7 +39,7 @@ const SignUpPage = () => {
     }
     setFormData({
       email: "",
-      username: "",
+      fullName: "",
       password: ""
     });
   };
@@ -66,17 +66,17 @@ const SignUpPage = () => {
                 />
               </div>
 
-              {/* Username */}
+              {/* fullName */}
 
               <div>
                 <label className="block mb-1 text-gray-600 font-medium">
-                  Username
+                  fullName
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter your username"
-                  value={formData.username}
-                  onChange={(e) => setFormData({...formData, username: e.target.value})}
+                  placeholder="Enter your fullName"
+                  value={formData.fullName}
+                  onChange={(e) => setFormData({...formData, fullName: e.target.value})}
                   className="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-400"
                 />
               </div>
